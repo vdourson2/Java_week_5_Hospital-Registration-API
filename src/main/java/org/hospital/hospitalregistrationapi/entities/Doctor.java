@@ -8,7 +8,7 @@ public class Doctor {
 	private static int lastId;
 	
 	public Doctor() {
-		
+		this.id = ++lastId;
 	}
 	
 	public Doctor(String name, String specialization) {
