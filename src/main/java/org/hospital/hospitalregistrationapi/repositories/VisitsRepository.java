@@ -16,13 +16,14 @@ public class VisitsRepository {
 	private List<Visit> visits = new ArrayList<>();
 	
 	public VisitsRepository() {
-		Visit visit1 = new Visit("Joseph","Dupont",4, "02/01/2024");
+
+		Visit visit1 = new Visit("Joseph","Dupont",4);
 		visits.add(visit1);
-		Visit visit2 = new Visit("Alice","Dumarais",3, "02/01/2024");
+		Visit visit2 = new Visit("Alice","Dumarais",3, "2024-01-02");
 		visits.add(visit2);
-		Visit visit3 = new Visit("Adelaide","Dulak",4, "03/01/2024");
+		Visit visit3 = new Visit("Adelaide","Dulak",4, "2024-01-03");
 		visits.add(visit3);
-		Visit visit4 = new Visit("Antonin","Dubois",1, "04/01/2024");
+		Visit visit4 = new Visit("Antonin","Dubois",1, "2024-01-04");
 		visits.add(visit4);
 	}
 
@@ -33,7 +34,7 @@ public class VisitsRepository {
 	
 	// Get visits method
 	public String getVisits(LocalDate chosenDate) {
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		String formattedDate = chosenDate.format(formatter);
 		
 		for (Visit visit : visits) {

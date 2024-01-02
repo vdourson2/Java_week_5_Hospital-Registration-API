@@ -9,11 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -33,7 +29,8 @@ public class HospitalRegistrationsController {
 //	Justine
 	
 	@RequestMapping(value = "/api/visits", method = RequestMethod.POST)
-    public ResponseEntity<Object> registerVisitor(@RequestBody Visit visit){
+    public ResponseEntity<Object> registerVisitor(@RequestParam String firstName, @RequestParam String lastName, @RequestParam(required = false, defaultValue = "-1") int doctorId){
+        Visit visit = (doctorId == -1) ? new Visit(firstName, lastName) : new Visit(firstName, lastName, doctorId);
         visits.addVisit(visit);
         return new ResponseEntity<>("201 Created on successful registration, id : " + visit.getId(), HttpStatus.CREATED);
     }
@@ -47,7 +44,7 @@ public class HospitalRegistrationsController {
 	
   @GetMapping("/api/visits")
   public String getVisits(@RequestParam String date) {
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     LocalDate chosenDate = LocalDate.parse(date, formatter);
     return visits.getVisits(chosenDate);
   }
