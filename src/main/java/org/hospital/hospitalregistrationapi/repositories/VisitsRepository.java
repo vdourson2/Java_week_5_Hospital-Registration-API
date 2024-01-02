@@ -35,19 +35,23 @@ public class VisitsRepository {
 	// Get visits method
 	public String getVisits(LocalDate chosenDate) {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-		String formattedDate = chosenDate.format(formatter);
+		String visitsInfo = "";
 		
 		for (Visit visit : visits) {
-			
 			String date = visit.getVisitTimestamp();
 			LocalDate localDate = LocalDate.parse(date, formatter)
 							.atStartOfDay(ZoneId.systemDefault())
-					.toLocalDate();
+							.toLocalDate();
 			
 			if (localDate.equals(chosenDate)) {
-				return visit.getFirstName() + " " + visit.getLastName() + " " + visit.getVisitTimestamp();
+				visitsInfo += visit.getFirstName() + " " + visit.getLastName() + " " + visit.getVisitTimestamp() + "\n";
 			}
-	}
-		return "No visits on " + formattedDate;
+		}
+		
+		if (visitsInfo.isEmpty()) {
+			visitsInfo = "No visits on " + chosenDate.format(formatter);
+		}
+		
+		return visitsInfo;
 	}
 }
