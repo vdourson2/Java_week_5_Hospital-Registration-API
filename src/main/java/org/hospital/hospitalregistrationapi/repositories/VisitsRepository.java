@@ -34,24 +34,19 @@ public class VisitsRepository {
 	// Get visits method
 	public String getVisits(LocalDate chosenDate) {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-		StringBuilder visitsInfo = new StringBuilder();
+		String formattedDate = chosenDate.format(formatter);
 		
 		for (Visit visit : visits) {
-			Instant instant = Instant.ofEpochMilli(visit.getVisitTimestamp());
-			LocalDate date = instant.atZone(ZoneId.systemDefault()).toLocalDate();
-			String formattedDate = date.format(formatter);
 			
-			if (date.equals(chosenDate)) {
-				visitsInfo.append("Visit by ")
-								.append(visit.getFirstName())
-								.append(" ")
-								.append(visit.getLastName())
-								.append(" on ")
-								.append(formattedDate)
-								.append("\n");
+			String date = visit.getVisitTimestamp();
+			LocalDate localDate = LocalDate.parse(date, formatter)
+							.atStartOfDay(ZoneId.systemDefault())
+					.toLocalDate();
+			
+			if (localDate.equals(chosenDate)) {
+				return visit.getFirstName() + " " + visit.getLastName() + " " + visit.getVisitTimestamp();
 			}
-		}
-		
-		return visitsInfo.toString();
+	}
+		return "No visits on " + formattedDate;
 	}
 }

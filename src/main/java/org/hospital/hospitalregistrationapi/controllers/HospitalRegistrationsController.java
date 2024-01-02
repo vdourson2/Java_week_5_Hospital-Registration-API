@@ -45,7 +45,7 @@ public class HospitalRegistrationsController {
 //	Valentin
 	
 	
-  @GetMapping("/visits")
+  @GetMapping("/api/visits")
   public String getVisits(@RequestParam String date) {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     LocalDate chosenDate = LocalDate.parse(date, formatter);
@@ -69,10 +69,5 @@ public class HospitalRegistrationsController {
 		System.out.println(doctor.getName());
 		return new ResponseEntity<Integer>((Integer) doctor.getId(), HttpStatus.CREATED);
 	}
-	
-	
-	
-	
-	
-	
+ 
 }
