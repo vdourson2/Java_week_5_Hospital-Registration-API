@@ -50,8 +50,6 @@ public class HospitalRegistrationsController {
         return new ResponseEntity<>(visits.getVisits(start, end), HttpStatus.OK);
     }
 	
-	
-	
 //	Valentin
 	
 	
@@ -64,15 +62,9 @@ public class HospitalRegistrationsController {
   
   @GetMapping("/api/doctors/{id}")
   public Doctor getDoctor(@PathVariable int id) {
-    return doctors.getDoctors()
-            .stream()
-            .filter(doctor -> doctor.getId() == id)
-            .findFirst()
-            .orElse(null);
+    return doctors.getById(id);
   }
 
-
-	
 //	Virginie
 	
 	@PostMapping("/api/doctors")
@@ -82,7 +74,6 @@ public class HospitalRegistrationsController {
 		} 
 		else {
 			doctors.addNewDoctor(doctor);
-			System.out.println(doctor.getName());
 			return new ResponseEntity<Integer>((Integer) doctor.getId(), HttpStatus.CREATED);
 		}
 	}
@@ -93,8 +84,8 @@ public class HospitalRegistrationsController {
 			throw new Exception("Some fields are null");
 		} 
 		else {
-			doctors.update(updateDoctor);
-			System.out.println(updateDoctor.getName());
+			Doctor oldDoctor = doctors.getById(id);
+			doctors.replace(oldDoctor, updateDoctor);
 			return ResponseEntity.ok(updateDoctor);
 		}
 	}

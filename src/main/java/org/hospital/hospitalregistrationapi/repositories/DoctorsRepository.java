@@ -35,8 +35,15 @@ public class DoctorsRepository {
 	}
 	
 	public Doctor getById(int id) {
-		
-		return doctor;
+		return doctors.stream()
+	            .filter(doctor -> doctor.getId() == id)
+	            .findFirst()
+	            .orElse(null);
+	}
+	
+	public void replace(Doctor oldDoctor, Doctor replaceDoctor) {
+		int index = doctors.indexOf(oldDoctor);
+		doctors.set(index, replaceDoctor);
 	}
 	
 	
