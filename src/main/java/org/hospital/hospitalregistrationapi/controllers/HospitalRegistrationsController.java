@@ -1,18 +1,23 @@
 package org.hospital.hospitalregistrationapi.controllers;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+
 import org.hospital.hospitalregistrationapi.entities.Doctor;
 import org.hospital.hospitalregistrationapi.entities.Visit;
 import org.hospital.hospitalregistrationapi.repositories.DoctorsRepository;
 import org.hospital.hospitalregistrationapi.repositories.VisitsRepository;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class HospitalRegistrationsController {
@@ -49,22 +54,27 @@ public class HospitalRegistrationsController {
     return visits.getVisits(chosenDate);
   }
 
-  
-	
-	
-	
-	
-	
-	
-	
+
 	
 //	Virginie
 	
 	@PostMapping("/api/doctors")
-	public ResponseEntity<Integer> create(@RequestBody Doctor doctor) {
-		doctors.addNewDoctor(doctor);
-		System.out.println(doctor.getName());
-		return new ResponseEntity<Integer>((Integer) doctor.getId(), HttpStatus.CREATED);
+	public ResponseEntity<Integer> create(@RequestBody Doctor doctor) throws Exception {
+		if ((doctor.getName() == null) || (doctor.getSpecialization() == null)){
+			throw new Exception("Some fields are null");
+		} 
+		else {
+			doctors.addNewDoctor(doctor);
+			System.out.println(doctor.getName());
+			return new ResponseEntity<Integer>((Integer) doctor.getId(), HttpStatus.CREATED);
+		}
 	}
- 
+
+
+	
+	@GetMapping("/api/doctors")
+	public @ResponseBody List<Doctor> listDoctors(){
+		return doctors.getDoctors();
+	}
+
 }
