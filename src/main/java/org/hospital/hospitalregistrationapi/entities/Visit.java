@@ -1,6 +1,5 @@
 package org.hospital.hospitalregistrationapi.entities;
 
-import java.time.Instant;
 import java.util.UUID;
 
 public class Visit {
@@ -9,12 +8,17 @@ public class Visit {
 	private String lastName;
 	private UUID id;
 	private int doctorId;
-	private long visitTimestamp;
+	private String visitTimestamp;
 	
 	public Visit() {
-        this.id = UUID.randomUUID();
-		Instant instant = Instant.now();
-		this.visitTimestamp = instant.toEpochMilli();
+	}
+	
+	public Visit(String firstName, String lastName, int id, String visitTimestamp) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.id = UUID.randomUUID();
+		
+		this.visitTimestamp = visitTimestamp;
     }
 	
 	public Visit(String firstName, String lastName) {
@@ -54,10 +58,10 @@ public class Visit {
 	public void setDoctorId(int doctorId) {
 		this.doctorId = doctorId;
 	}
-	public long getVisitTimestamp() {
+	public String getVisitTimestamp() {
 		return visitTimestamp;
 	}
-	public void setVisitTimestamp(long visitTimestamp) {
+	public void setVisitTimestamp(String visitTimestamp) {
 		this.visitTimestamp = visitTimestamp;
 	}
 	
