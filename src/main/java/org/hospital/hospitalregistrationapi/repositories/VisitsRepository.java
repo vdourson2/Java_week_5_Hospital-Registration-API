@@ -17,9 +17,9 @@ public class VisitsRepository {
 	
 	public VisitsRepository() {
 
-		Visit visit1 = new Visit("Joseph","Dupont",4);
+		Visit visit1 = new Visit("Joseph","Dupont",4, "2024-01-01");
 		visits.add(visit1);
-		Visit visit2 = new Visit("Alice","Dumarais",3, "2024-01-02");
+		Visit visit2 = new Visit("Alice","Dumarais",3, "2024-01-01");
 		visits.add(visit2);
 		Visit visit3 = new Visit("Adelaide","Dulak",4, "2024-01-03");
 		visits.add(visit3);
