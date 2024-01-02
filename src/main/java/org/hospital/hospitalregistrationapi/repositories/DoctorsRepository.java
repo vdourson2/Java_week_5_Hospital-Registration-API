@@ -45,6 +45,10 @@ public class DoctorsRepository {
 		int index = doctors.indexOf(oldDoctor);
 		doctors.set(index, replaceDoctor);
 	}
+
+	public void delete(Doctor doctor){
+		doctors.remove(doctor);
+	}
 	
 	
 }

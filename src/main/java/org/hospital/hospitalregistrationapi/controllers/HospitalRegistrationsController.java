@@ -34,7 +34,8 @@ public class HospitalRegistrationsController {
     }
 
 //	Justine
-	
+
+    // POST method to add a visit with firstname, lastname and optional doctor id
 	@RequestMapping(value = "/api/visits", method = RequestMethod.POST)
     public ResponseEntity<Object> registerVisitor(@RequestParam String firstName, @RequestParam String lastName, @RequestParam(required = false, defaultValue = "-1") int doctorId){
         Visit visit = (doctorId == -1) ? new Visit(firstName, lastName) : new Visit(firstName, lastName, doctorId);
@@ -42,12 +43,20 @@ public class HospitalRegistrationsController {
         return new ResponseEntity<>(visit.getId(), HttpStatus.CREATED);
     }
 
+    // GET method to get the visits in a time period
     @RequestMapping(value = "/api/visits", method = RequestMethod.GET, params = {"startDate", "endDate"})
     public ResponseEntity<Object> getVisits(@RequestParam String startDate, @RequestParam String endDate){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate start = LocalDate.parse(startDate, formatter);
         LocalDate end = LocalDate.parse(endDate, formatter);
         return new ResponseEntity<>(visits.getVisits(start, end), HttpStatus.OK);
+    }
+
+    // DELETE method to remove a doctor based on the id
+    @RequestMapping(value = "/api/doctors/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity<Object> deleteDoctor(@PathVariable int id){
+        doctors.delete(doctors.getById(id));
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 	
 //	Valentin
