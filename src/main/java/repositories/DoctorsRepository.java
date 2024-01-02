@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hospital.hospitalregistrationapi.entities.Doctor;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class DoctorsRepository {
 
 	private List<Doctor> doctors = new ArrayList<>();
