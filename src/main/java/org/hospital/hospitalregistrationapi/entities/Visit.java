@@ -1,12 +1,14 @@
 package org.hospital.hospitalregistrationapi.entities;
 
 import java.time.Instant;
+import java.util.UUID;
 
 public class Visit {
 	
 	private String firstName;
 	private String lastName;
-	private int id;
+	private UUID id;
+	private int doctorId;
 	private long visitTimestamp;
 	
 	public Visit() {
@@ -15,10 +17,25 @@ public class Visit {
 	public Visit(String firstName, String lastName, int id, String visitTimestamp) {
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.id = id;
+		this.id = UUID.randomUUID();
+
 		Instant instant = Instant.now();
 		this.visitTimestamp = instant.toEpochMilli();
+    }
+	
+	public Visit(String firstName, String lastName) {
+		this();
+		this.firstName = firstName;
+		this.lastName = lastName;
 	}
+
+	public Visit(String firstName, String lastName, int doctorId) {
+		this();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.doctorId = doctorId;
+	}
+
 	public String getFirstName() {
 		return firstName;
 	}
@@ -31,11 +48,17 @@ public class Visit {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	public int getId() {
-		return id;
+	public String getId() {
+		return String.valueOf(id);
 	}
-	public void setId(int id) {
+	public void setId(UUID id) {
 		this.id = id;
+	}
+	public int getDoctorId() {
+		return doctorId;
+	}
+	public void setDoctorId(int doctorId) {
+		this.doctorId = doctorId;
 	}
 	public long getVisitTimestamp() {
 		return visitTimestamp;

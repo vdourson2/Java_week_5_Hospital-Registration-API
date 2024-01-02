@@ -25,6 +25,10 @@ public class VisitsRepository {
 		Visit visit4 = new Visit("Antonin","Dubois",1, "04/01/2024");
 		visits.add(visit4);
 	}
+
+	public void addVisit(Visit visit){
+		visits.add(visit);
+	}
 	
 	
 	// Get visits method

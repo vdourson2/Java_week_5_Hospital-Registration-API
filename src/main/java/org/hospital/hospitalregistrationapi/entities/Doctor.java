@@ -5,17 +5,26 @@ public class Doctor {
 	private String name;
 	private String specialization;
 	private int id;
+	private static int lastId;
 	
 	public Doctor() {
 		
 	}
 	
-	public Doctor(String name, String specialization, int id) {
+	public Doctor(String name, String specialization) {
 		this.name = name;
 		this.specialization = specialization;
-		this.id = id;
+		this.id = ++lastId;
 	}
 	
+	public static int getLastId() {
+		return lastId;
+	}
+
+	public static void setLastId(int lastId) {
+		Doctor.lastId = lastId;
+	}
+
 	public String getName() {
 		return name;
 	}
