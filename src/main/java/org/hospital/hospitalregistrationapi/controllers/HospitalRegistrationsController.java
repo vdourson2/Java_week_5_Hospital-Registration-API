@@ -22,9 +22,10 @@ public class HospitalRegistrationsController {
 //	Justine
 	
 	@RequestMapping(value = "/api/visits", method = RequestMethod.POST)
-    public ResponseEntity<Object> registerVisitor(@RequestBody Visit visit){
+    public ResponseEntity<Object> registerVisitor(@RequestParam String firstName, @RequestParam String lastName, @RequestParam(required = false, defaultValue = "-1") int doctorId){
+        Visit visit = (doctorId == -1) ? new Visit(firstName, lastName) : new Visit(firstName, lastName, doctorId);
         visits.addVisit(visit);
-        return new ResponseEntity<>("201 Created on successful registration, id : " + visit.getId(), HttpStatus.CREATED);
+        return new ResponseEntity<>("201 Created on successful registration, id : " + visit.getLastName(), HttpStatus.CREATED);
     }
 	
 	
