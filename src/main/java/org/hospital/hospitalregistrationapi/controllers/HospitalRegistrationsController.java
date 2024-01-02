@@ -44,7 +44,7 @@ public class HospitalRegistrationsController {
 	
   @GetMapping("/api/visits")
   public String getVisits(@RequestParam String date) {
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     LocalDate chosenDate = LocalDate.parse(date, formatter);
     return visits.getVisits(chosenDate);
   }

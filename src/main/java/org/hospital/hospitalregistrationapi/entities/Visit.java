@@ -14,6 +14,7 @@ public class Visit {
 	public Visit() {
 		this.id = UUID.randomUUID();
 		this.visitTimestamp = String.valueOf(java.time.LocalDate.now());
+		System.out.println(this.visitTimestamp);
 	}
 	
 	public Visit(String firstName, String lastName, int id, String visitTimestamp) {
