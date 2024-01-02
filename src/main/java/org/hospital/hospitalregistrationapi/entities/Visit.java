@@ -12,7 +12,6 @@ public class Visit {
 	private long visitTimestamp;
 	
 	public Visit() {
-		System.out.println("super constructor");
         this.id = UUID.randomUUID();
 		Instant instant = Instant.now();
 		this.visitTimestamp = instant.toEpochMilli();
@@ -20,14 +19,12 @@ public class Visit {
 	
 	public Visit(String firstName, String lastName) {
 		this();
-		System.out.println("constructor1");
 		this.firstName = firstName;
 		this.lastName = lastName;
 	}
 
 	public Visit(String firstName, String lastName, int doctorId) {
 		this();
-		System.out.println("constructor2");
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.doctorId = doctorId;
