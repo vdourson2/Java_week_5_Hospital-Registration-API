@@ -10,14 +10,7 @@ import org.hospital.hospitalregistrationapi.repositories.DoctorsRepository;
 import org.hospital.hospitalregistrationapi.repositories.VisitsRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class HospitalRegistrationsController {
@@ -52,6 +45,15 @@ public class HospitalRegistrationsController {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     LocalDate chosenDate = LocalDate.parse(date, formatter);
     return visits.getVisits(chosenDate);
+  }
+  
+  @GetMapping("/api/doctors/{id}")
+  public Doctor getDoctor(@PathVariable int id) {
+    return doctors.getDoctors()
+            .stream()
+            .filter(doctor -> doctor.getId() == id)
+            .findFirst()
+            .orElse(null);
   }
 
 
