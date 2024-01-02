@@ -12,7 +12,7 @@ public class Visit {
 	public Visit() {
 	}
 	
-	public Visit(String firstName, String lastName, int id) {
+	public Visit(String firstName, String lastName, int id, String visitTimestamp) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.id = id;
