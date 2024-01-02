@@ -11,7 +11,9 @@ import org.hospital.hospitalregistrationapi.repositories.VisitsRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -70,7 +72,17 @@ public class HospitalRegistrationsController {
 		}
 	}
 
-
+	@PutMapping("/api/doctors/{id}")
+	public ResponseEntity<Object> update(@PathVariable("id") int id, @RequestBody Doctor updateDoctor) throws Exception {
+		if ((updateDoctor.getName() == null) || (updateDoctor.getSpecialization() == null)){
+			throw new Exception("Some fields are null");
+		} 
+		else {
+			doctors.update(updateDoctor);
+			System.out.println(updateDoctor.getName());
+			return ResponseEntity.ok(upgit dateDoctor);
+		}
+	}
 	
 	@GetMapping("/api/doctors")
 	public @ResponseBody List<Doctor> listDoctors(){

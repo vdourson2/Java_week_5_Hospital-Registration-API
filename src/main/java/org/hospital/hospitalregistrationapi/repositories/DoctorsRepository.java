@@ -34,5 +34,10 @@ public class DoctorsRepository {
 		this.doctors = doctors;
 	}
 	
+	public Doctor getById(int id) {
+		
+		return doctor;
+	}
+	
 	
 }
