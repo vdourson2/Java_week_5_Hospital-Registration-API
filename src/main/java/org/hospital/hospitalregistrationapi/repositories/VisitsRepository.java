@@ -54,4 +54,21 @@ public class VisitsRepository {
 		
 		return visitsInfo;
 	}
+
+	public String getVisits(LocalDate start, LocalDate end){
+		String visitsInfo = "";
+
+		for (Visit visit : visits){
+			LocalDate date = LocalDate.parse(visit.getVisitTimestamp());
+			if (date.isAfter(start) && date.isBefore(end) || date.isEqual(start) || date.isEqual(end)){
+				visitsInfo += visit.getFirstName() + " " + visit.getLastName() + " " + visit.getVisitTimestamp() + "\n";
+			}
+		}
+
+		if (visitsInfo.isEmpty()) {
+			visitsInfo = "No visits between " + start + " and " + end;
+		}
+
+		return visitsInfo;
+	}
 }
