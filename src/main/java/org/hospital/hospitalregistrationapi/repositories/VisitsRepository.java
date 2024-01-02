@@ -1,4 +1,4 @@
-package repositories;
+package org.hospital.hospitalregistrationapi.repositories;
 
 import java.util.ArrayList;
 import java.util.List;
