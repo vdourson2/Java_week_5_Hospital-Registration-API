@@ -16,7 +16,7 @@ public class VisitsRepository {
 	private List<Visit> visits = new ArrayList<>();
 	
 	public VisitsRepository() {
-		Visit visit1 = new Visit("Joseph","Dupont",4, "01/01/2024");
+		Visit visit1 = new Visit("Joseph","Dupont",4, "02/01/2024");
 		visits.add(visit1);
 		Visit visit2 = new Visit("Alice","Dumarais",3, "02/01/2024");
 		visits.add(visit2);
