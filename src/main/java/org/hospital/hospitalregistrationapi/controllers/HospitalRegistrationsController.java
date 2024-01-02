@@ -39,10 +39,16 @@ public class HospitalRegistrationsController {
     public ResponseEntity<Object> registerVisitor(@RequestParam String firstName, @RequestParam String lastName, @RequestParam(required = false, defaultValue = "-1") int doctorId){
         Visit visit = (doctorId == -1) ? new Visit(firstName, lastName) : new Visit(firstName, lastName, doctorId);
         visits.addVisit(visit);
-        return new ResponseEntity<>("201 Created on successful registration, id : " + visit.getId(), HttpStatus.CREATED);
+        return new ResponseEntity<>(visit.getId(), HttpStatus.CREATED);
     }
-	
-	
+
+    @RequestMapping(value = "/api/visits", method = RequestMethod.GET, params = {"startDate", "endDate"})
+    public ResponseEntity<Object> getVisits(@RequestParam String startDate, @RequestParam String endDate){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate start = LocalDate.parse(startDate, formatter);
+        LocalDate end = LocalDate.parse(endDate, formatter);
+        return new ResponseEntity<>(visits.getVisits(start, end), HttpStatus.OK);
+    }
 	
 	
 	
@@ -54,6 +60,15 @@ public class HospitalRegistrationsController {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     LocalDate chosenDate = LocalDate.parse(date, formatter);
     return visits.getVisits(chosenDate);
+  }
+  
+  @GetMapping("/api/doctors/{id}")
+  public Doctor getDoctor(@PathVariable int id) {
+    return doctors.getDoctors()
+            .stream()
+            .filter(doctor -> doctor.getId() == id)
+            .findFirst()
+            .orElse(null);
   }
 
 
@@ -80,7 +95,7 @@ public class HospitalRegistrationsController {
 		else {
 			doctors.update(updateDoctor);
 			System.out.println(updateDoctor.getName());
-			return ResponseEntity.ok(upgit dateDoctor);
+			return ResponseEntity.ok(updateDoctor);
 		}
 	}
 	
