@@ -12,14 +12,19 @@ public class DoctorsRepository {
 	private List<Doctor> doctors = new ArrayList<>();
 	
 	public DoctorsRepository() {
-		Doctor doctor1 = new Doctor("Machin", "Gastrology",1);
+		Doctor doctor1 = new Doctor("Machin", "Gastrology");
 		this.doctors.add(doctor1);
-		Doctor doctor2 = new Doctor("Bidule", "Traumatology",2);
+		Doctor doctor2 = new Doctor("Bidule", "Traumatology");
 		this.doctors.add(doctor2);
-		Doctor doctor3 = new Doctor("Much", "Surgery",3);
+		Doctor doctor3 = new Doctor("Much", "Surgery");
 		this.doctors.add(doctor3);
-		Doctor doctor4 = new Doctor("Truc", "Maternity",4);
+		Doctor doctor4 = new Doctor("Truc", "Maternity");
 		this.doctors.add(doctor4);
+	}
+	
+	public void addNewDoctor(Doctor doctor) {
+		this.doctors.add(doctor);
+		
 	}
 	
 }
