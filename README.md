@@ -1,8 +1,8 @@
 # Hospital Registration API
 
 * Type of challenge: **Project**
-* Duration: 1 day
-* Team challenge: Valentin Lefort, Justine Leleu, Virginie Dourson
+* Duration: **1 day**
+* Team challenge: **Valentin Lefort, Justine Leleu, Virginie Dourson**
 
 ## Learning objectives
 - Understand Spring Boot framework and RESTful API design.
