@@ -76,6 +76,7 @@ public class HospitalRegistrationsController {
 
 //	Virginie
 	
+  	// Post method to add a new doctor with name and specialization
 	@PostMapping("/api/doctors")
 	public ResponseEntity<Integer> create(@RequestBody Doctor doctor) throws Exception {
 		if ((doctor.getName() == null) || (doctor.getSpecialization() == null)){
@@ -86,7 +87,8 @@ public class HospitalRegistrationsController {
 			return new ResponseEntity<Integer>((Integer) doctor.getId(), HttpStatus.CREATED);
 		}
 	}
-
+	
+	//Put method to modify a doctor, with name and specialization
 	@PutMapping("/api/doctors/{id}")
 	public ResponseEntity<Object> update(@PathVariable("id") int id, @RequestBody Doctor updateDoctor) throws Exception {
 		if ((updateDoctor.getName() == null) || (updateDoctor.getSpecialization() == null)){
@@ -99,6 +101,7 @@ public class HospitalRegistrationsController {
 		}
 	}
 	
+	//Get method to list all the doctors
 	@GetMapping("/api/doctors")
 	public @ResponseBody List<Doctor> listDoctors(){
 		return doctors.getDoctors();
